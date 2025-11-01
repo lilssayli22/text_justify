@@ -1,0 +1,101 @@
+==============================
+Projet : AODjustify (TP AOD – ENSIMAG)
+Auteur : Ilyass Regragui
+==============================
+
+1. 🎯 OBJECTIF DU PROGRAMME
+---------------------------
+Ce programme implémente un algorithme de justification de texte
+optimale en largeur fixe (M caractères), selon le principe de
+programmation dynamique (équation de Bellman).
+
+Le but est de découper chaque paragraphe du texte en lignes
+de largeur M, de manière à minimiser la "mauvaise répartition"
+des espaces (pénalisée au cube des espaces restants).
+
+Le programme lit un fichier texte au format ISO-8859-1, justifie
+son contenu et génère un fichier de sortie .out contenant le
+texte justifié, tout en affichant sur la sortie d’erreur :
+    AODjustify CORRECT> <coût_optimal>
+
+
+2. 🧠 MÉTHODE ALGORITHMIQUE
+----------------------------
+L’algorithme repose sur la programmation dynamique itérative :
+
+    C*(i) = min_{k ≥ i} [ N(M - Δ(i,k)) + C*(k+1) ]
+    avec N(x) = x³  et Δ(i,k) = somme des longueurs + espaces.
+
+Le programme traite :
+ - La lecture mémoire du fichier (via mmap)
+ - L’extraction des mots et paragraphes
+ - Le calcul du coût optimal par DP
+ - La reconstruction et écriture du texte justifié
+
+
+3. 🧩 STRUCTURE DU PROJET
+--------------------------
+AODjustify/
+├── Makefile                → Compilation standard (make / make clean)
+├── src/
+│   └── AODjustify.c        → Code source principal
+├── bin/
+│   └── AODjustify          → Binaire compilé
+├── tests/
+│   ├── foo.iso8859-1.in    → Exemple de fichier d’entrée
+│   └── foo.iso8859-1.in.out→ Sortie correspondante
+└── doc/
+    └── index.txt           → Ce fichier de documentation
+
+
+4. ⚙️ COMPILATION
+------------------
+Depuis la racine du projet :
+    $ make
+
+Cela génère le binaire exécutable :
+    bin/AODjustify
+
+
+5. 🚀 EXÉCUTION
+----------------
+Commande générale :
+    $ ./bin/AODjustify M tests/fichier.in
+
+Exemples :
+    $ ./bin/AODjustify 40 tests/foo.iso8859-1.in
+
+La sortie produite :
+ - Un fichier "tests/foo.iso8859-1.in.out"
+ - Un message de validation sur stderr :
+      AODjustify CORRECT> 38
+
+
+6. 🧪 TESTS ET OUTILS
+----------------------
+- Fichiers de test fournis : dans /tests
+- Vérification d’encodage :
+      $ file tests/foo.iso8859-1.in
+- Conversion UTF-8 → ISO-8859-1 :
+      $ iconv -f utf-8 -t iso-8859-1 fichier.txt -o fichier.in
+- Analyse de performance :
+      $ valgrind --tool=cachegrind ./bin/AODjustify 80 tests/foo.iso8859-1.in
+
+
+7. 💡 DÉTAILS TECHNIQUES
+-------------------------
+- Programmation dynamique descendante (itérative)
+- Complexité temporelle : Θ(n²)
+- Complexité mémoire : O(n)
+- Lecture mémoire : mmap pour performance
+- Fichiers traités : ISO-8859-1, ISO-8859-15, ASCII
+
+
+8. 👨‍💻 AUTEUR
+--------------
+Nom : Ilyass Regragui
+École : Grenoble INP - Ensimag
+TP : 4MMAOD – Justification de texte (Bellman)
+Année : 2025
+Système : Ubuntu 22.04
+Langage : C (ISO C11)
