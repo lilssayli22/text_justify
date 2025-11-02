@@ -16,6 +16,7 @@
 #define MAX_WORDS 1000000     // Limite maximale de mots par paragraphe
 #define MAX_WORD_LEN 256      // Longueur maximale d'un mot
 #define MAX_LINE_LEN 10000    // Largeur maximale autorisée pour une ligne
+#define MAX_PARAGRAPHS 10000  // ← AUGMENTÉ de 1000 à 10000
 
 typedef long long ll;
 
@@ -150,7 +151,7 @@ int extract_paragraphs(char *data, size_t size, Paragraph *paragraphs, int *para
             free(p->words);
         }
 
-        if (*para_count >= 1000)
+        if (*para_count >= MAX_PARAGRAPHS)  // ← MODIFIÉ ICI : 1000 → MAX_PARAGRAPHS
             error("trop de paragraphes");
     }
 
@@ -331,7 +332,7 @@ int main(int argc, char *argv[]) {
     size_t size;
     char *data = map_file(filename, &size);
 
-    Paragraph paragraphs[1000];
+    Paragraph paragraphs[MAX_PARAGRAPHS];  // ← MODIFIÉ ICI : 1000 → MAX_PARAGRAPHS
     int para_count = 0;
     extract_paragraphs(data, size, paragraphs, &para_count);
     if (para_count == 0)

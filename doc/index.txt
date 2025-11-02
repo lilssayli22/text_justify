@@ -1,6 +1,6 @@
 ==============================
 Projet : AODjustify (TP AOD – ENSIMAG)
-Auteur : Ilyass Regragui
+Auteur : Ilyass Regragui - Aymen el Hanafy
 ==============================
 
 1. 🎯 OBJECTIF DU PROGRAMME
@@ -66,7 +66,7 @@ Exemples :
     $ ./bin/AODjustify 40 tests/foo.iso8859-1.in
 
 La sortie produite :
- - Un fichier "tests/foo.iso8859-1.in.out"
+ - Un fichier "tests/foo.iso8859-1.out"
  - Un message de validation sur stderr :
       AODjustify CORRECT> 38
 
@@ -93,7 +93,7 @@ La sortie produite :
 
 8. 👨‍💻 AUTEUR
 --------------
-Nom : Ilyass Regragui
+Nom : Ilyass Regragui - Aymen el Hanafy
 École : Grenoble INP - Ensimag
 TP : 4MMAOD – Justification de texte (Bellman)
 Année : 2025
